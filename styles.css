@@ -1,0 +1,287 @@
+/* ===================================
+   BenOS v1.1 - Strong Roots
+   Stylesheet
+=================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef4ec;
+    color: #2f3e2f;
+    padding: 20px;
+}
+
+/* ---------- HEADER ---------- */
+
+.top-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+
+    background: #2d5a27;
+    color: white;
+
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.logo h1{
+    font-size:2.2rem;
+}
+
+.logo p{
+    opacity:.9;
+    margin-top:6px;
+}
+
+.clock-panel,
+.weather-panel{
+
+    background:rgba(255,255,255,.12);
+
+    padding:15px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+#clock{
+
+    font-size:2rem;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+/* ---------- DASHBOARD ---------- */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:20px;
+
+}
+
+/* ---------- CARDS ---------- */
+
+.card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+.card h2{
+
+    color:#2d5a27;
+
+    margin-bottom:15px;
+
+    border-bottom:2px solid #dfe9dc;
+
+    padding-bottom:8px;
+
+}
+
+/* ---------- TEXT AREAS ---------- */
+
+textarea{
+
+    width:100%;
+
+    min-height:170px;
+
+    resize:vertical;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    border:1px solid #c8d3c4;
+
+    font-size:1rem;
+
+    font-family:inherit;
+
+}
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#2d5a27;
+
+}
+
+/* ---------- PROGRESS ---------- */
+
+.progress-item{
+
+    margin-bottom:18px;
+
+}
+
+progress{
+
+    width:100%;
+
+    height:20px;
+
+}
+
+/* ---------- CALENDAR ---------- */
+
+#calendar{
+
+    min-height:170px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:2px dashed #b8c7b2;
+
+    border-radius:10px;
+
+    color:#6b7768;
+
+}
+
+/* ---------- TEACHING ---------- */
+
+#teaching{
+
+    font-size:1.1rem;
+
+    line-height:1.6;
+
+    min-height:170px;
+
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+
+    text-align:center;
+
+    margin-top:35px;
+
+    color:#666;
+
+    font-size:.9rem;
+
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+.top-header{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:900px){
+
+.top-header{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/* ===========================
+   Planner v2
+=========================== */
+
+.task-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:10px;
+
+    padding:6px;
+
+    border-radius:8px;
+
+    transition:all .25s ease;
+
+}
+
+/* ===== Completed Task Styling ===== */
+
+.task-row.completed{
+
+    background:#e8f5e9;
+
+    border-left:5px solid #2e7d32;
+
+    border-radius:8px;
+
+    padding:6px;
+
+    transition:all .25s ease;
+
+}
+
+.task-row.completed input[type="text"]{
+
+    text-decoration:line-through;
+
+    color:#2e7d32;
+
+    font-weight:bold;
+
+    background:transparent;
+
+}
+.task-row.completed{
+
+    background:#e8f5e9;
+
+    border-left:5px solid #2e7d32;
+
+}
+
+.task-row.completed input[type="text"]{
+
+    text-decoration:line-through;
+
+    color:#2e7d32;
+
+    font-weight:bold;
+
+    background:transparent;
+
+}

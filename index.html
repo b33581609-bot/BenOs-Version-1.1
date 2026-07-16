@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌲 BenOS v1.1 - Strong Roots</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="planner.js"></script>
+<script defer src="calendar.js"></script>
+<script defer src="weather.js"></script>
+<script defer src="teachings.js"></script>
+<script defer src="script.js"></script>
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="logo">
+        <h1>🌲 BenOS</h1>
+        <p>Version 1.1 – Strong Roots</p>
+    </div>
+
+    <div class="clock-panel">
+
+        <div id="clock">
+            00:00
+        </div>
+
+        <div id="date">
+            Loading...
+        </div>
+
+    </div>
+
+    <div class="weather-panel">
+
+        <h2>🌤 Weather</h2>
+
+        <div id="weather">
+            Loading...
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="dashboard">
+
+    <section class="card">
+
+        <h2>🎯 Today's Plan</h2>
+
+<div class="planner-progress">
+
+    <div id="todayProgressText">
+        0 of 0 tasks completed
+    </div>
+
+    <progress
+        id="todayProgress"
+        value="0"
+        max="100">
+    </progress>
+
+</div>
+
+<div id="todayTasks"></div>
+
+<button id="addTodayTask">
+    + Add Task
+</button>
+    </section>
+
+
+    <section class="card">
+
+        <<h2>📝 Tomorrow's Plan</h2>
+
+<div id="tomorrowTasks"></div>
+
+<button id="addTomorrowTask">
++ Add Task
+</button>
+
+<br><br>
+
+<button id="startDayButton">
+🌅 Start My Day
+</button>
+    </section>
+
+
+    <section class="card">
+
+        <h2>📅 Calendar</h2>
+
+        <div id="calendar">
+
+            Calendar coming in Version 1.1
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>🌿 Today's Teaching</h2>
+
+        <div id="teaching">
+
+            Loading...
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>📊 Weekly Progress</h2>
+
+        <div class="progress-item">
+
+            Job Applications
+
+            <progress value="0" max="10"></progress>
+
+        </div>
+
+        <div class="progress-item">
+
+            Learning
+
+            <progress value="0" max="7"></progress>
+
+        </div>
+
+        <div class="progress-item">
+
+            TikToks
+
+            <progress value="0" max="5"></progress>
+
+        </div>
+
+        <div class="progress-item">
+
+            CNC Business
+
+            <progress value="0" max="5"></progress>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>📝 Notes</h2>
+
+        <textarea id="notes"
+        placeholder="Write anything here..."></textarea>
+
+    </section>
+
+</main>
+
+<footer>
+
+    🌲 BenOS v1.1 — Strong Roots
+
+</footer>
+
+</body>
+
+</html>
