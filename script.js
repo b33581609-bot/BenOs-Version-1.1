@@ -45,9 +45,6 @@ document.getElementById("teaching").textContent = teachings[today];
 
 // ---------- Weather Placeholder ----------
 
-document.getElementById("weather").textContent =
-    "Weather integration coming soon...";
-
 // ---------- Auto Save ----------
 
 function enableAutoSave(id, key) {
@@ -66,3 +63,49 @@ function enableAutoSave(id, key) {
 
 }
 enableAutoSave("notes", "benos_notes");
+
+// ===============================
+// Welcome Dashboard
+// ===============================
+
+function updateGreeting() {
+
+    const greeting = document.getElementById("greeting");
+    const date = document.getElementById("todayDate");
+    const message = document.getElementById("dailyMessage");
+
+    if (!greeting || !date || !message) return;
+
+    const now = new Date();
+    const hour = now.getHours();
+
+    if (hour < 12) {
+        greeting.textContent = "🌅 Good Morning, Ben";
+    } else if (hour < 18) {
+        greeting.textContent = "☀️ Good Afternoon, Ben";
+    } else {
+        greeting.textContent = "🌙 Good Evening, Ben";
+    }
+
+    date.textContent = now.toLocaleDateString(undefined, {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+
+    const messages = [
+        "One task at a time. Progress beats perfection.",
+        "Small steps every day build great things.",
+        "Today's effort creates tomorrow's opportunities.",
+        "Stay focused. Stay consistent.",
+        "Do the next right thing.",
+        "Progress, not perfection."
+    ];
+
+    const day = now.getDay();
+
+    message.textContent = messages[day];
+}
+
+document.addEventListener("DOMContentLoaded", updateGreeting);
