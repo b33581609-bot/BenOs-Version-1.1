@@ -1,7 +1,15 @@
-/* ===================================
-   BenOS v1.1 - Planner Module
-=================================== */
+/* ==================================================
+   BenOS
+   planner.js
 
+   Purpose:
+   Handles task creation, completion,
+   saving, loading, and progress tracking.
+
+   Version:
+   1.2
+
+================================================== */
 let todayTasks =
     JSON.parse(localStorage.getItem("benos_today_tasks")) || [];
 
@@ -201,6 +209,30 @@ function updateProgress() {
 
     }
 
+    // 🌲 Daily Mission Progress
+    const missionBar =
+        document.getElementById("missionProgressBar");
+
+    const missionText =
+        document.getElementById("missionProgress");
+
+    if (missionBar) {
+
+        missionBar.max = total || 1;
+
+        missionBar.value = completed;
+
+    }
+
+    if (missionText) {
+
+        missionText.textContent =
+            `${completed} of ${total} tasks completed`;
+
+    }
+
+    updateMissionTask();
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -222,5 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 renderTasks("tomorrowTasks", tomorrowTasks);
 
 updateProgress();
+
+
 
 });

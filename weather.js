@@ -22,7 +22,7 @@ async function updateWeather(latitude = 44.3894, longitude = -79.6903, locationN
         const daily = data.daily;
 
         weather.innerHTML = `
-            <h3>📍 ${locationName}</h3>
+            <h3>🌤 ${locationName}</h3>
 
             <h1>${current.temperature_2m}°C</h1>
 

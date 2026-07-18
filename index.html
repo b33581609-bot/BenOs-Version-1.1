@@ -6,7 +6,8 @@
     <title>🌲 BenOS v1.1 - Strong Roots</title>
 
     <link rel="stylesheet" href="styles.css">
-    <<script defer src="planner.js"></script>
+    <script defer src="planner.js"></script>
+<script defer src="mission.js"></script>
 <script defer src="calendar.js"></script>
 <script defer src="weather.js"></script>
 <script defer src="teachings.js"></script>
@@ -68,6 +69,34 @@
 
 <main class="dashboard">
 
+<section class="card" id="dailyMission">
+
+    <h2>🌲 Daily Mission</h2>
+
+    <div id="missionGreeting">
+        Good Morning, Ben
+    </div>
+
+    <div id="missionProgress">
+    Today's Progress
+</div>
+
+<progress
+    id="missionProgressBar"
+    value="0"
+    max="100">
+</progress>
+
+<div id="missionTask">
+    Next Task: Loading...
+</div>
+
+    <div id="missionMessage">
+        One step at a time.
+    </div>
+
+</section>
+
     <section class="card">
 
         <h2>🎯 Today's Plan</h2>
@@ -96,7 +125,7 @@
 
     <section class="card">
 
-        <<h2>📝 Tomorrow's Plan</h2>
+        <h2>📝 Tomorrow's Plan</h2>
 
 <div id="tomorrowTasks"></div>
 

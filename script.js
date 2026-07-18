@@ -109,3 +109,4 @@ function updateGreeting() {
 }
 
 document.addEventListener("DOMContentLoaded", updateGreeting);
+document.addEventListener("DOMContentLoaded", updateMissionGreeting);

@@ -125,6 +125,66 @@ body {
 }
 
 /* ==================================================
+   06A. DAILY MISSION
+================================================== */
+
+#dailyMission{
+
+    background:linear-gradient(135deg,#2d5a27,#3d7a37);
+
+    color:white;
+
+}
+
+#dailyMission h2{
+
+    color:white;
+
+    border-bottom:2px solid rgba(255,255,255,.25);
+
+}
+
+#missionGreeting{
+
+    font-size:1.6rem;
+
+    font-weight:bold;
+
+    margin:15px 0;
+
+}
+
+#missionProgress{
+
+    font-size:1.1rem;
+
+    margin:12px 0;
+
+}
+
+#missionTask{
+
+    margin:12px 0;
+
+    padding:10px;
+
+    background:rgba(255,255,255,.12);
+
+    border-radius:8px;
+
+}
+
+#missionMessage{
+
+    margin-top:18px;
+
+    font-style:italic;
+
+    opacity:.9;
+
+}
+
+/* ==================================================
    09. TEXT AREAS
 ================================================== */
 
