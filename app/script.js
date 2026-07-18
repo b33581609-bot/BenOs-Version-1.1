@@ -110,3 +110,23 @@ function updateGreeting() {
 
 document.addEventListener("DOMContentLoaded", updateGreeting);
 document.addEventListener("DOMContentLoaded", updateMissionGreeting);
+
+function updateCoreStatus() {
+
+    const footer = document.getElementById("systemFooter");
+
+    if (!footer) return;
+
+    if (typeof BenOS !== "undefined") {
+
+        footer.textContent =
+        `🌲 BenOS v${BenOS.version} — ${BenOS.identity.system}`;
+
+    }
+
+}
+
+document.addEventListener(
+"DOMContentLoaded",
+updateCoreStatus
+);
