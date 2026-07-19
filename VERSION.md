@@ -2,7 +2,7 @@
 
 Current Version
 
-1.1.0
+Version 2.0
 
 Release Name
 
