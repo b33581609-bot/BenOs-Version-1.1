@@ -18,8 +18,12 @@ function updateMissionTask() {
 
     if (!missionTask) return;
 
+    if (!BenOS.modules.planner.todayTasks) return;
+
     const nextTask =
-        todayTasks.find(task => !task.completed);
+    BenOS.modules.planner.todayTasks.find(
+        task => !task.completed
+    );
 
     if (nextTask) {
 

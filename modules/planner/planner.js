@@ -1,87 +1,496 @@
 /*
 ==================================================
-Module:
-    Planner
+ BEN OS v2.0 - PLANNER MODULE
+ Strong Roots Architecture
 
-Version:
-    Ben OS v2.0
+ Purpose:
+ Manage daily tasks, future tasks, completion,
+ storage, and planner events.
 
-Purpose:
-    Manage daily and future tasks.
+ Dependencies:
+ BenOS Core
+ BenOS Storage
+ BenOS Events
+ BenOS Logger
 
-Dependencies:
-    BenOS Core
-    State
-    Storage
-    Events
-    Logger
-
-Responsibilities:
-    - Create tasks
-    - Display tasks
-    - Track completion
-    - Save planner data
-
-Last Updated:
-    Ben OS v2.0
 ==================================================
 */
 
 
-(function () {
-
-
-    if (typeof BenOS === "undefined") {
-
-        console.error(
-            "❌ BenOS Core required for Planner"
-        );
-
-        return;
-
-    }
-
-
-    BenOS.modules = BenOS.modules || {};
-
-
-    BenOS.modules.planner = {
-
+BenOS.modules.planner = {
 
     todayTasks: [],
+    tomorrowTasks: [],
 
 
-tomorrowTasks: [],
+    /*
+    ------------------------------------
+    Initialize Planner
+    ------------------------------------
+    */
 
-createTask(text = "", completed = false) {
-    return {
-        text,
-        completed
-    };
-},
     init() {
 
-    this.load();
+        this.load();
 
-    renderTasks(
-        "todayTasks",
-        this.todayTasks
-    );
+        console.log("Loaded Today Tasks:", this.todayTasks);
 
-    renderTasks(
-        "tomorrowTasks",
-        this.tomorrowTasks
-    );
+        this.renderTasks(
+            "todayTasks",
+            this.todayTasks
+        );
 
-    updateProgress();
+        this.renderTasks(
+            "tomorrowTasks",
+            this.tomorrowTasks
+        );
+
+console.log("Running updateProgress on startup");
+
+                this.updateProgress();
+
+        updateMissionTask();
 
 
-    BenOS.logger.info(
-        "Planner module initialized"
-    );
+        if (BenOS.logger) {
 
-},
+            BenOS.logger.info(
+                "Planner module initialized"
+            );
 
+        }
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Create Task
+    ------------------------------------
+    */
+
+    createTask(text = "") {
+
+        return {
+
+            id: Date.now(),
+
+            text: text,
+
+            completed: false,
+
+            created:
+                new Date().toISOString()
+
+        };
+
+    },
+
+
+    /*
+    ------------------------------------
+    Add Today Task
+    ------------------------------------
+    */
+
+    addTodayTask() {
+
+
+        const task =
+            this.createTask();
+
+
+        this.todayTasks.push(task);
+
+
+        this.save();
+
+
+        this.renderTasks(
+            "todayTasks",
+            this.todayTasks
+        );
+
+
+        this.updateProgress();
+
+
+        this.emitUpdate();
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Add Tomorrow Task
+    ------------------------------------
+    */
+
+    addTomorrowTask() {
+
+
+        const task =
+            this.createTask();
+
+
+        this.tomorrowTasks.push(task);
+
+
+        this.save();
+
+
+        this.renderTasks(
+            "tomorrowTasks",
+            this.tomorrowTasks
+        );
+
+
+        this.emitUpdate();
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Move Tomorrow → Today
+    ------------------------------------
+    */
+
+    startMyDay() {
+
+
+        this.todayTasks =
+            [
+                ...this.todayTasks,
+                ...this.tomorrowTasks
+            ];
+
+
+        this.tomorrowTasks = [];
+
+
+        this.save();
+
+
+        this.renderTasks(
+    "todayTasks",
+    this.todayTasks
+);
+
+this.renderTasks(
+    "tomorrowTasks",
+    this.tomorrowTasks
+);
+
+this.updateProgress();
+
+updateMissionTask();
+
+        this.emitUpdate();
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Render Tasks
+    ------------------------------------
+    */
+
+    renderTasks(containerId, tasks) {
+
+
+        const container =
+            document.getElementById(containerId);
+
+
+        if (!container) {
+
+            console.warn(
+                "Planner container missing:",
+                containerId
+            );
+
+            return;
+
+        }
+
+
+        container.innerHTML = "";
+
+
+        tasks.forEach(task => {
+
+
+            const row =
+                document.createElement("div");
+
+
+            row.className =
+    task.completed ? "task-row completed" : "task-row";
+
+
+
+            const checkbox =
+                document.createElement("input");
+
+
+            checkbox.type =
+                "checkbox";
+
+
+            checkbox.checked =
+                task.completed;
+
+
+
+            checkbox.addEventListener(
+    "change",
+    () => {
+
+        task.completed =
+            checkbox.checked;
+
+
+        this.save();
+
+
+        this.renderTasks(
+            containerId,
+            tasks
+        );
+
+
+        this.updateProgress();
+
+
+        this.emitUpdate();
+
+    }
+);
+
+
+
+            const input =
+                document.createElement("input");
+
+
+            input.value =
+                task.text;
+
+
+            input.addEventListener(
+                "change",
+                () => {
+
+
+                    task.text =
+                        input.value;
+
+
+                    this.save();
+
+
+                }
+            );
+
+
+
+            const deleteButton =
+                document.createElement("button");
+
+
+            deleteButton.textContent =
+                "🗑";
+
+
+            deleteButton.addEventListener(
+                "click",
+                () => {
+
+
+                    const index =
+                        tasks.indexOf(task);
+
+
+                    tasks.splice(
+                        index,
+                        1
+                    );
+
+
+                    this.save();
+
+
+                    this.renderTasks(
+                        containerId,
+                        tasks
+                    );
+
+
+                    this.updateProgress();
+
+
+                    this.emitUpdate();
+
+
+                }
+            );
+
+
+
+            row.appendChild(checkbox);
+
+            row.appendChild(input);
+
+            row.appendChild(deleteButton);
+
+
+
+            container.appendChild(row);
+
+
+        });
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Progress Tracking
+    ------------------------------------
+    */
+
+    updateProgress() {
+
+
+        const total =
+            this.todayTasks.length;
+
+
+        const completed =
+            this.todayTasks.filter(
+                task => task.completed
+            ).length;
+
+
+
+        const percent =
+            total === 0
+            ? 0
+            : Math.round(
+                (completed / total) * 100
+            );
+
+
+
+        const progress =
+            document.getElementById(
+                "progressBar"
+            );
+
+
+        if(progress){
+
+            progress.style.width =
+                percent + "%";
+
+        }
+
+
+
+        return percent;
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Storage
+    ------------------------------------
+    */
+
+    save() {
+
+
+        if(!BenOS.storage)
+            return;
+
+
+
+        BenOS.storage.save(
+            "benos_today_tasks",
+            this.todayTasks
+        );
+
+
+        BenOS.storage.save(
+            "benos_tomorrow_tasks",
+            this.tomorrowTasks
+        );
+
+
+    },
+
+
+    load() {
+
+
+        if(!BenOS.storage)
+            return;
+
+
+
+        this.todayTasks =
+            BenOS.storage.load(
+                "benos_today_tasks"
+            ) || [];
+
+
+
+        this.tomorrowTasks =
+            BenOS.storage.load(
+                "benos_tomorrow_tasks"
+            ) || [];
+
+
+    },
+
+
+    /*
+    ------------------------------------
+    Events
+    ------------------------------------
+    */
+
+        emitUpdate(){
+
+
+        if(BenOS.events){
+
+
+            BenOS.events.emit(
+                "planner.updated",
+                {
+                    today:
+                    this.todayTasks,
+
+                    tomorrow:
+                    this.tomorrowTasks
+                }
+            );
+
+
+        }
+
+
+    },
 
 
     save() {
@@ -100,35 +509,34 @@ createTask(text = "", completed = false) {
     },
 
 
-
-        load() {
+    load() {
 
         this.todayTasks =
-    BenOS.storage.load(
-        "benos_today_tasks",
-        []
-    );
+            BenOS.storage.load(
+                "benos_today_tasks",
+                []
+            );
 
 
-if (!Array.isArray(this.todayTasks)) {
+        if (!Array.isArray(this.todayTasks)) {
 
-    this.todayTasks = [];
+            this.todayTasks = [];
 
-}
+        }
 
 
         this.tomorrowTasks =
-    BenOS.storage.load(
-        "benos_tomorrow_tasks",
-        []
-    );
+            BenOS.storage.load(
+                "benos_tomorrow_tasks",
+                []
+            );
 
 
-if (!Array.isArray(this.tomorrowTasks)) {
+        if (!Array.isArray(this.tomorrowTasks)) {
 
-    this.tomorrowTasks = [];
+            this.tomorrowTasks = [];
 
-}
+        }
 
     }
 
@@ -136,7 +544,17 @@ if (!Array.isArray(this.tomorrowTasks)) {
 };
 
 
-})();
+
+// Auto initialize
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        BenOS.modules.planner.init();
+
+    }
+);
 
 
 function saveTasks() {
@@ -159,16 +577,30 @@ function renderTasks(containerId, taskArray) {
         checkbox.checked = task.completed;
 
         checkbox.addEventListener("change", () => {
-            task.completed = checkbox.checked;
-            if (task.completed) {
-                row.classList.add("completed");
-            } else {
-                row.classList.remove("completed");
-            }
-            saveTasks();
-            updateProgress();
-            renderTasks(containerId, taskArray);
-        });
+
+    task.completed = checkbox.checked;
+
+    if (task.completed) {
+
+        row.classList.add("completed");
+
+    } else {
+
+        row.classList.remove("completed");
+
+    }
+
+    saveTasks();
+
+    renderTasks(containerId, taskArray);
+
+    console.log("Checkbox update running");
+
+    updateProgress();
+
+    updateMissionTask();
+
+});
 
       const input = document.createElement("input");
 
@@ -246,7 +678,9 @@ function addTodayTask() {
         BenOS.modules.planner.todayTasks
     );
 
-    updateProgress();
+        updateProgress();
+
+    updateMissionTask();
 
 }
 
@@ -304,6 +738,8 @@ function updateProgress() {
     const text =
         document.getElementById("todayProgressText");
 
+    console.log("Progress elements:", progress, text);
+
     if (progress) {
 
         progress.max = total || 1;
@@ -340,8 +776,13 @@ function updateProgress() {
             `${completed} of ${total} tasks completed`;
 
     }
+    if (total > 0) {
+         
+        updateMissionTask();
+}
 
-    updateMissionTask();
+    
+    
 
 }
 
@@ -350,6 +791,8 @@ window.todayTasks = BenOS.modules.planner.todayTasks;
 window.tomorrowTasks = BenOS.modules.planner.tomorrowTasks;
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    BenOS.modules.planner.init();
 
     document
         .getElementById("addTodayTask")
@@ -362,19 +805,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document
         .getElementById("startDayButton")
         .addEventListener("click", startMyDay);
-renderTasks(
-    "todayTasks",
-    BenOS.modules.planner.todayTasks
-);
-
-
-renderTasks(
-    "tomorrowTasks",
-    BenOS.modules.planner.tomorrowTasks
-);
-
-updateProgress();
-
-
 
 });
