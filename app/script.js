@@ -120,7 +120,7 @@ function updateCoreStatus() {
     if (typeof BenOS !== "undefined") {
 
         footer.textContent =
-        `🌲 BenOS v${BenOS.version} — ${BenOS.identity.system}`;
+        `🌲 BenOS v${BenOS.version.number} — ${BenOS.identity.system}`;
 
     }
 

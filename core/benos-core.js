@@ -5,8 +5,6 @@
 
 const BenOS = {
 
-    version: "1.2",
-
     identity: {
         name: "Ben",
         system: "Strong Roots"
