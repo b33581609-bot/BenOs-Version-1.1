@@ -137,6 +137,9 @@ console.log("Running updateProgress on startup");
 
         }
 
+        BenOS.state.planner.today = this.todayTasks;
+        BenOS.state.planner.tomorrow = this.tomorrowTasks;
+
     },
 
 
