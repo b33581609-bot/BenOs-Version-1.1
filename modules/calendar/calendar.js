@@ -448,6 +448,8 @@ BenOS.modules.calendar = {
 
         }
 
+        BenOS.state.calendar.events = this.events;
+
     }
 
 
