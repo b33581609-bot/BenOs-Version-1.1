@@ -96,13 +96,13 @@ console.log("Running updateProgress on startup");
 
         BenOS.storage.save(
             "benos_today_tasks",
-            this.todayTasks
+            BenOS.state.planner.today
         );
 
 
         BenOS.storage.save(
             "benos_tomorrow_tasks",
-            this.tomorrowTasks
+            BenOS.state.planner.tomorrow
         );
 
     },
@@ -110,35 +110,35 @@ console.log("Running updateProgress on startup");
 
     load() {
 
-        this.todayTasks =
+        BenOS.state.planner.today =
             BenOS.storage.load(
                 "benos_today_tasks",
                 []
             );
 
 
-        if (!Array.isArray(this.todayTasks)) {
+        if (!Array.isArray(BenOS.state.planner.today)) {
 
-            this.todayTasks = [];
+            BenOS.state.planner.today = [];
 
         }
 
 
-        this.tomorrowTasks =
+        BenOS.state.planner.tomorrow =
             BenOS.storage.load(
                 "benos_tomorrow_tasks",
                 []
             );
 
 
-        if (!Array.isArray(this.tomorrowTasks)) {
+        if (!Array.isArray(BenOS.state.planner.tomorrow)) {
 
-            this.tomorrowTasks = [];
+            BenOS.state.planner.tomorrow = [];
 
         }
 
-        BenOS.state.planner.today = this.todayTasks;
-        BenOS.state.planner.tomorrow = this.tomorrowTasks;
+        this.todayTasks = BenOS.state.planner.today;
+        this.tomorrowTasks = BenOS.state.planner.tomorrow;
 
     },
 
