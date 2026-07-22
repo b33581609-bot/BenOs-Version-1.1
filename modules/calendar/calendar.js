@@ -48,7 +48,15 @@ BenOS.modules.calendar = {
 
     init() {
 
-        // Future phase: load events and render calendar
+        this.load();
+
+        if (BenOS.logger) {
+
+            BenOS.logger.info(
+                "Calendar module initialized"
+            );
+
+        }
 
     },
 
@@ -61,7 +69,19 @@ BenOS.modules.calendar = {
 
     createEvent(title, date, time, notes) {
 
-        // Future phase: build and return a new event object
+        return {
+
+            id: Date.now(),
+
+            title: title,
+
+            date: date,
+
+            time: time,
+
+            notes: notes
+
+        };
 
     },
 
@@ -74,7 +94,9 @@ BenOS.modules.calendar = {
 
     addEvent(event) {
 
-        // Future phase: add event to events array and persist
+        this.events.push(event);
+
+        this.save();
 
     },
 
@@ -87,7 +109,19 @@ BenOS.modules.calendar = {
 
     deleteEvent(id) {
 
-        // Future phase: remove event from events array and persist
+        const index = this.events.findIndex(
+            event => event.id === id
+        );
+
+        if (index === -1) {
+
+            return;
+
+        }
+
+        this.events.splice(index, 1);
+
+        this.save();
 
     },
 
@@ -113,14 +147,26 @@ BenOS.modules.calendar = {
 
     save() {
 
-        // Future phase: persist events via BenOS.storage
+        BenOS.storage.save(
+            "benos_calendar_events",
+            this.events
+        );
 
     },
 
 
     load() {
 
-        // Future phase: load events via BenOS.storage
+        this.events = BenOS.storage.load(
+            "benos_calendar_events",
+            []
+        );
+
+        if (!Array.isArray(this.events)) {
+
+            this.events = [];
+
+        }
 
     }
 
