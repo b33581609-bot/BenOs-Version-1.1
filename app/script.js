@@ -37,11 +37,21 @@ function enableAutoSave(id, key) {
 
     if (!element) return;
 
-    element.value = localStorage.getItem(key) || "";
+    const stored = BenOS.storage.load(key, null);
+
+    if (stored !== null) {
+
+        element.value = stored;
+
+    } else {
+
+        element.value = localStorage.getItem(key) || "";
+
+    }
 
     element.addEventListener("input", () => {
 
-        localStorage.setItem(key, element.value);
+        BenOS.storage.save(key, element.value);
 
     });
 
