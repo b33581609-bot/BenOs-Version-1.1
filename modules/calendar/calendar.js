@@ -37,8 +37,6 @@ Last Updated:
 
 BenOS.modules.calendar = {
 
-    events: [],
-
 
     /*
     ------------------------------------
@@ -96,7 +94,7 @@ BenOS.modules.calendar = {
 
     addEvent(event) {
 
-        this.events.push(event);
+        BenOS.state.calendar.events.push(event);
 
         this.save();
 
@@ -111,7 +109,7 @@ BenOS.modules.calendar = {
 
     deleteEvent(id) {
 
-        const index = this.events.findIndex(
+        const index = BenOS.state.calendar.events.findIndex(
             event => event.id === id
         );
 
@@ -121,7 +119,7 @@ BenOS.modules.calendar = {
 
         }
 
-        this.events.splice(index, 1);
+        BenOS.state.calendar.events.splice(index, 1);
 
         this.save();
 
@@ -175,7 +173,7 @@ BenOS.modules.calendar = {
 
         container.appendChild(dateDisplay);
 
-        const todayEvents = this.events.filter(
+        const todayEvents = BenOS.state.calendar.events.filter(
             event => event.date === today
         );
 
@@ -213,7 +211,7 @@ BenOS.modules.calendar = {
 
         container.appendChild(todaySection);
 
-        const upcomingEvents = this.events
+        const upcomingEvents = BenOS.state.calendar.events
             .filter(event => event.date > today)
             .sort((a, b) => a.date.localeCompare(b.date));
 
@@ -447,8 +445,6 @@ BenOS.modules.calendar = {
             BenOS.state.calendar.events = [];
 
         }
-
-        this.events = BenOS.state.calendar.events;
 
     }
 
