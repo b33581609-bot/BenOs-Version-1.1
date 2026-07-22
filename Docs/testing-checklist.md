@@ -188,6 +188,32 @@ Verify:
 
 ---
 
+# Calendar Module Testing
+
+Verify:
+
+☐ Application loads without console errors
+
+☐ Calendar initializes once
+
+☐ Today's date displays correctly
+
+☐ Create event works
+
+☐ Delete event works
+
+☐ Events persist after refresh
+
+☐ Today's events display correctly
+
+☐ Upcoming events display correctly
+
+☐ Invalid storage safely falls back to []
+
+☐ No duplicate rendering occurs
+
+---
+
 # Core System Testing
 
 ## Storage

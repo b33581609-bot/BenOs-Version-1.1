@@ -312,15 +312,26 @@ modules/calendar/
 
 Status:
 
-In Development
+Active
 
 Current State:
 
-Calendar module design approved. Implementation pending.
+Calendar module fully implemented as the v1 MVP.
+
+Current capabilities:
+
+- Create events
+- Delete events
+- Persist events through BenOS Storage
+- Display today's events
+- Display upcoming events
 
 Future Purpose:
 
-Provide scheduling and event management through date-based user events.
+- Monthly calendar grid
+- Categories
+- Planner integration
+- Reminders
 
 ---
 

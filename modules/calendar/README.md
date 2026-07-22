@@ -16,15 +16,18 @@ modules/calendar/
 Calendar uses:
 
 - BenOS Core
-- BenOS Storage (future phase)
-- Logger (future phase)
+- BenOS Storage
+- Logger
 
 ---
 
 ## Current Features
 
-✅ Module foundation created
-✅ Event data model defined
+✅ Create calendar events
+✅ Display today's events
+✅ Display upcoming events
+✅ Delete events
+✅ Persist events using BenOS Storage
 
 ---
 
@@ -42,11 +45,10 @@ Calendar uses:
 
 ## Future Development
 
-- Event creation
-- Event persistence
-- Calendar UI
-- Monthly view
+- Monthly calendar grid
+- Categories
 - Planner integration
+- Reminders
 
 ---
 

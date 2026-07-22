@@ -12,22 +12,22 @@ Purpose:
 
 Responsibilities:
     - Define the Calendar module namespace
-    - Hold calendar event data
-    - Provide placeholders for future event
-      creation, storage, and rendering logic
+    - Create, store, and delete calendar events
+    - Persist events through BenOS Storage
+    - Render events into the Calendar UI
 
 Dependencies:
     BenOS Core
 
 Used By:
-    Application UI (future phase)
+    Application UI
 
 Future Improvements:
-    - Event creation and deletion
-    - Event persistence via BenOS Storage
-    - Calendar UI rendering
     - Monthly calendar grid
+    - Categories
     - Planner integration
+    - Reminders
+    - Advanced scheduling features
 
 Last Updated:
     Ben OS v2.0
