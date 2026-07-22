@@ -89,19 +89,19 @@ Last Updated:
 
         teachings: [
 
-            "Wisdom",
+            "🦅 Wisdom — Listen more than you speak today.",
 
-            "Love",
+            "🤝 Respect — Treat yourself and others with respect.",
 
-            "Respect",
+            "❤️ Love — Let kindness guide your actions today.",
 
-            "Bravery",
+            "🛡️ Bravery — Do one thing you've been avoiding.",
 
-            "Honesty",
+            "🌿 Honesty — Be truthful with yourself today.",
 
-            "Humility",
+            "🍃 Humility — Every person has something to teach you.",
 
-            "Truth"
+            "✨ Truth — Live today as the person you want to become."
 
         ],
 
