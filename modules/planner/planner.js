@@ -49,8 +49,6 @@ console.log("Running updateProgress on startup");
 
                 updateProgress();
 
-        this.emitUpdate();
-
 
         if (BenOS.logger) {
 
@@ -216,8 +214,6 @@ function renderTasks(containerId, taskArray) {
 
     updateProgress();
 
-    BenOS.modules.planner.emitUpdate();
-
 });
 
       const input = document.createElement("input");
@@ -297,8 +293,6 @@ function addTodayTask() {
     );
 
         updateProgress();
-
-    BenOS.modules.planner.emitUpdate();
 
 }
 
