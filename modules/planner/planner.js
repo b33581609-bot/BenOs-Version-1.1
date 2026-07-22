@@ -19,9 +19,6 @@
 
 BenOS.modules.planner = {
 
-    todayTasks: [],
-    tomorrowTasks: [],
-
 
     /*
     ------------------------------------
@@ -33,16 +30,16 @@ BenOS.modules.planner = {
 
         this.load();
 
-        console.log("Loaded Today Tasks:", this.todayTasks);
+        console.log("Loaded Today Tasks:", BenOS.state.planner.today);
 
         renderTasks(
             "todayTasks",
-            this.todayTasks
+            BenOS.state.planner.today
         );
 
         renderTasks(
             "tomorrowTasks",
-            this.tomorrowTasks
+            BenOS.state.planner.tomorrow
         );
 
 console.log("Running updateProgress on startup");
@@ -137,9 +134,6 @@ console.log("Running updateProgress on startup");
 
         }
 
-        this.todayTasks = BenOS.state.planner.today;
-        this.tomorrowTasks = BenOS.state.planner.tomorrow;
-
     },
 
 
@@ -159,10 +153,10 @@ console.log("Running updateProgress on startup");
                 "planner.updated",
                 {
                     today:
-                    this.todayTasks,
+                    BenOS.state.planner.today,
 
                     tomorrow:
-                    this.tomorrowTasks
+                    BenOS.state.planner.tomorrow
                 }
             );
 
@@ -284,7 +278,7 @@ container.appendChild(row);
 
 function addTodayTask() {
 
-    BenOS.modules.planner.todayTasks.push(
+    BenOS.state.planner.today.push(
         BenOS.modules.planner.createTask()
     );
 
@@ -292,7 +286,7 @@ function addTodayTask() {
 
     renderTasks(
         "todayTasks",
-        BenOS.modules.planner.todayTasks
+        BenOS.state.planner.today
     );
 
         updateProgress();
@@ -301,7 +295,7 @@ function addTodayTask() {
 
 function addTomorrowTask() {
 
-    BenOS.modules.planner.tomorrowTasks.push(
+    BenOS.state.planner.tomorrow.push(
         BenOS.modules.planner.createTask()
     );
 
@@ -309,29 +303,29 @@ function addTomorrowTask() {
 
     renderTasks(
         "tomorrowTasks",
-        BenOS.modules.planner.tomorrowTasks
+        BenOS.state.planner.tomorrow
     );
 
 }
 
 function startMyDay() {
 
-    BenOS.modules.planner.todayTasks.push(
-        ...BenOS.modules.planner.tomorrowTasks
+    BenOS.state.planner.today.push(
+        ...BenOS.state.planner.tomorrow
     );
 
-    BenOS.modules.planner.tomorrowTasks.length = 0;
+    BenOS.state.planner.tomorrow.length = 0;
 
     saveTasks();
 
     renderTasks(
         "todayTasks",
-        BenOS.modules.planner.todayTasks
+        BenOS.state.planner.today
     );
 
     renderTasks(
         "tomorrowTasks",
-        BenOS.modules.planner.tomorrowTasks
+        BenOS.state.planner.tomorrow
     );
 
     updateProgress();
@@ -340,7 +334,7 @@ function startMyDay() {
 function updateProgress() {
 
     const todayTasks =
-        BenOS.modules.planner.todayTasks;
+        BenOS.state.planner.today;
 
     const total = todayTasks.length;
 

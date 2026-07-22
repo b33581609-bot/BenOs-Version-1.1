@@ -18,7 +18,7 @@ Responsibilities:
 
 Dependencies:
     BenOS Core
-    BenOS.modules.planner (todayTasks)
+    BenOS.state.planner.today
 
 Used By:
     Application UI
@@ -49,10 +49,10 @@ BenOS.modules.mission = {
 
         if (!missionTask) return;
 
-        if (!BenOS.modules.planner.todayTasks) return;
+        if (!BenOS.state.planner.today) return;
 
         const nextTask =
-        BenOS.modules.planner.todayTasks.find(
+        BenOS.state.planner.today.find(
             task => !task.completed
         );
 
