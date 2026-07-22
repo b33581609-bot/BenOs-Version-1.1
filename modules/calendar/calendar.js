@@ -429,7 +429,7 @@ BenOS.modules.calendar = {
 
         BenOS.storage.save(
             "benos_calendar_events",
-            this.events
+            BenOS.state.calendar.events
         );
 
     },
@@ -437,18 +437,18 @@ BenOS.modules.calendar = {
 
     load() {
 
-        this.events = BenOS.storage.load(
+        BenOS.state.calendar.events = BenOS.storage.load(
             "benos_calendar_events",
             []
         );
 
-        if (!Array.isArray(this.events)) {
+        if (!Array.isArray(BenOS.state.calendar.events)) {
 
-            this.events = [];
+            BenOS.state.calendar.events = [];
 
         }
 
-        BenOS.state.calendar.events = this.events;
+        this.events = BenOS.state.calendar.events;
 
     }
 
