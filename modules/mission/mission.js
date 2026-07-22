@@ -1,107 +1,177 @@
-/* ==================================================
-   BenOS
-   mission.js
+/*
+==================================================
+File:
+    mission.js
 
-   Purpose:
-   Handles the Daily Mission dashboard,
-   including greetings, mission progress,
-   next task, and future motivation.
+Version:
+    Ben OS v2.0
 
-   Version:
-   1.2
-================================================== */
+Purpose:
+    Handles the Daily Mission dashboard,
+    including greetings, mission progress,
+    next task, and future motivation.
 
-function updateMissionTask() {
+Responsibilities:
+    - Display a time-of-day greeting
+    - Display the next incomplete Planner task
+    - Display a daily motivational message
 
-    const missionTask =
-        document.getElementById("missionTask");
+Dependencies:
+    BenOS Core
+    BenOS.modules.planner (todayTasks)
 
-    if (!missionTask) return;
+Used By:
+    Application UI
 
-    if (!BenOS.modules.planner.todayTasks) return;
+Future Improvements:
+    - Storage integration
+    - Replace direct Planner dependency with BenOS.events
+    - Logger integration for mission updates
 
-    const nextTask =
-    BenOS.modules.planner.todayTasks.find(
-        task => !task.completed
-    );
+Last Updated:
+    Ben OS v2.0
+==================================================
+*/
 
-    if (nextTask) {
 
-        missionTask.innerHTML =
-            `📋 Next Task:<br><strong>${nextTask.text}</strong>`;
+BenOS.modules.mission = {
 
-    } else {
+    /*
+    ------------------------------------
+    Update Mission Task
+    ------------------------------------
+    */
 
-        missionTask.innerHTML =
-            "🎉 <strong>All tasks completed!</strong>";
+    updateMissionTask() {
+
+        const missionTask =
+            document.getElementById("missionTask");
+
+        if (!missionTask) return;
+
+        if (!BenOS.modules.planner.todayTasks) return;
+
+        const nextTask =
+        BenOS.modules.planner.todayTasks.find(
+            task => !task.completed
+        );
+
+        if (nextTask) {
+
+            missionTask.innerHTML =
+                `📋 Next Task:<br><strong>${nextTask.text}</strong>`;
+
+        } else {
+
+            missionTask.innerHTML =
+                "🎉 <strong>All tasks completed!</strong>";
+
+        }
+
+    },
+
+
+    /*
+    ------------------------------------
+    Update Mission Greeting
+    ------------------------------------
+    */
+
+    updateMissionGreeting() {
+
+        const greeting =
+            document.getElementById("missionGreeting");
+
+        if (!greeting) return;
+
+        const hour = new Date().getHours();
+
+        let message = "";
+
+        if (hour < 12) {
+
+            message = "🌅 Good Morning, Ben";
+
+        } else if (hour < 18) {
+
+            message = "☀️ Good Afternoon, Ben";
+
+        } else {
+
+            message = "🌙 Good Evening, Ben";
+
+        }
+
+        greeting.textContent = message;
+
+    },
+
+
+    /*
+    ------------------------------------
+    Update Mission Message
+    ------------------------------------
+    */
+
+    updateMissionMessage() {
+
+        const message =
+            document.getElementById("missionMessage");
+
+        if (!message) return;
+
+        const messages = [
+
+            "🌲 One step at a time.",
+
+            "🌿 Progress beats perfection.",
+
+            "🦅 Small actions build great futures.",
+
+            "🔥 Finish one thing before starting another.",
+
+            "🌱 Every task completed is a promise kept to yourself.",
+
+            "💪 Consistency wins.",
+
+            "✨ Today is another chance to grow."
+
+        ];
+
+        const day = new Date().getDay();
+
+        message.textContent = messages[day];
+
+    },
+
+
+    /*
+    ------------------------------------
+    Initialize Mission
+    ------------------------------------
+    */
+
+    init() {
+
+        this.updateMissionGreeting();
+        this.updateMissionMessage();
+
+        if (BenOS.logger) {
+
+            BenOS.logger.info(
+                "Mission module initialized"
+            );
+
+        }
 
     }
 
-}
 
-function updateMissionGreeting() {
+};
 
-    const greeting =
-        document.getElementById("missionGreeting");
-
-    if (!greeting) return;
-
-    const hour = new Date().getHours();
-
-    let message = "";
-
-    if (hour < 12) {
-
-        message = "🌅 Good Morning, Ben";
-
-    } else if (hour < 18) {
-
-        message = "☀️ Good Afternoon, Ben";
-
-    } else {
-
-        message = "🌙 Good Evening, Ben";
-
-    }
-
-    greeting.textContent = message;
-
-}
-
-function updateMissionMessage() {
-
-    const message =
-        document.getElementById("missionMessage");
-
-    if (!message) return;
-
-    const messages = [
-
-        "🌲 One step at a time.",
-
-        "🌿 Progress beats perfection.",
-
-        "🦅 Small actions build great futures.",
-
-        "🔥 Finish one thing before starting another.",
-
-        "🌱 Every task completed is a promise kept to yourself.",
-
-        "💪 Consistency wins.",
-
-        "✨ Today is another chance to grow."
-
-    ];
-
-    const day = new Date().getDay();
-
-    message.textContent = messages[day];
-
-}
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    updateMissionGreeting();
-    updateMissionMessage();
+    BenOS.modules.mission.init();
 
 });
