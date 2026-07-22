@@ -27,22 +27,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ---------- Daily Teaching ----------
-
-const teachings = [
-    "🦅 Wisdom — Listen more than you speak today.",
-    "🤝 Respect — Treat yourself and others with respect.",
-    "❤️ Love — Let kindness guide your actions today.",
-    "🛡️ Bravery — Do one thing you've been avoiding.",
-    "🌿 Honesty — Be truthful with yourself today.",
-    "🍃 Humility — Every person has something to teach you.",
-    "✨ Truth — Live today as the person you want to become."
-];
-
-const today = new Date().getDay();
-
-document.getElementById("teaching").textContent = teachings[today];
-
 // ---------- Weather Placeholder ----------
 
 // ---------- Auto Save ----------
