@@ -99,3 +99,10 @@ BenOS.modules.teachings = {
 
 
 };
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    BenOS.modules.teachings.init();
+
+});
