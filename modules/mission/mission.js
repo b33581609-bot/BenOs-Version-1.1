@@ -170,6 +170,12 @@ BenOS.modules.mission = {
 };
 
 
+BenOS.events.on(
+    "planner.updated",
+    () => BenOS.modules.mission.updateMissionTask()
+);
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     BenOS.modules.mission.init();
