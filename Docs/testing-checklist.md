@@ -210,6 +210,12 @@ Verify:
 
 ☐ No duplicate rendering occurs
 
+☐ Calendar loads events from BenOS.state.calendar.events
+
+☐ Calendar mutations (add, delete) update BenOS.state correctly
+
+☐ Storage persistence continues through BenOS.storage
+
 ---
 
 # BenOS.state Testing
@@ -223,6 +229,10 @@ Verify:
 ☐ Storage persistence continues using BenOS.storage
 
 ☐ Mission receives Planner updates through BenOS.events
+
+☐ Calendar events load from BenOS.state.calendar
+
+☐ Calendar mutations (add, delete) update BenOS.state correctly
 
 ---
 

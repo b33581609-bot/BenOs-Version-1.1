@@ -85,7 +85,7 @@ The state system exists and defines areas for:
 
 Current Status:
 
-The state architecture is established but not all modules currently use it as their primary data source.
+Planner and Calendar now use BenOS.state as their primary data source. Other modules do not yet.
 
 ---
 
@@ -105,6 +105,7 @@ Responsibilities:
 Currently Used By:
 
 * Planner module
+* Calendar module
 
 Storage Technology:
 
@@ -316,7 +317,7 @@ Active
 
 Current State:
 
-Calendar module fully implemented as the v1 MVP.
+Calendar module fully implemented as the v1 MVP. Event data is owned by BenOS.state.calendar.events; BenOS.storage is now the persistence layer beneath it.
 
 Current capabilities:
 
@@ -429,7 +430,7 @@ Controls:
 ✅ Weather module
 ✅ Teachings module
 ✅ Calendar module
-✅ BenOS.state adoption (Planner)
+✅ BenOS.state adoption (Planner, Calendar)
 ✅ Event communication (Planner → Mission)
 
 ---

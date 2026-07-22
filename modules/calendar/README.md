@@ -17,6 +17,7 @@ Calendar uses:
 
 - BenOS Core
 - BenOS Storage
+- BenOS.state
 - Logger
 
 ---
@@ -54,6 +55,6 @@ Calendar uses:
 
 ## Status
 
-In Development
+Active
 
 Ben OS v2.0

@@ -5,6 +5,7 @@
 
 - Planner → Mission communication migrated to BenOS.events.
 - Planner task ownership migrated fully into BenOS.state.
+- Calendar event ownership migrated fully into BenOS.state.
 
 ### Improved
 
