@@ -179,7 +179,7 @@ modules/weather/
 ## Teachings
 
 Status:
-Planned
+Active
 
 Location:
 modules/teachings/

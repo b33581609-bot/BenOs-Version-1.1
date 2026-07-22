@@ -170,6 +170,24 @@ Future testing:
 
 ---
 
+# Teachings Module Testing
+
+Verify:
+
+☐ Application loads without console errors
+
+☐ Today's Teaching appears in the #teaching element
+
+☐ Displayed teaching matches BenOS.constants.teachings[current weekday]
+
+☐ Refreshing the page keeps correct behavior
+
+☐ Module initializes once
+
+☐ No duplicate rendering occurs
+
+---
+
 # Core System Testing
 
 ## Storage
