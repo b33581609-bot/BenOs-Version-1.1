@@ -1,6 +1,11 @@
 # 🌲 BenOS Changelog
 ## Unreleased
 
+### Architecture
+
+- Planner → Mission communication migrated to BenOS.events.
+- Planner task ownership migrated fully into BenOS.state.
+
 ### Improved
 
 - Reorganized styles.css into numbered sections.

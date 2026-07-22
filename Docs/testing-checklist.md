@@ -144,9 +144,7 @@ Verify:
 
 ☐ Planner connection works
 
-Future testing:
-
-☐ Event-based communication works
+☐ Mission updates through the planner.updated BenOS.events event
 
 ---
 
@@ -211,6 +209,20 @@ Verify:
 ☐ Invalid storage safely falls back to []
 
 ☐ No duplicate rendering occurs
+
+---
+
+# BenOS.state Testing
+
+Verify:
+
+☐ Planner tasks load from BenOS.state.planner
+
+☐ Planner mutations (add, delete, complete, Start My Day) update BenOS.state correctly
+
+☐ Storage persistence continues using BenOS.storage
+
+☐ Mission receives Planner updates through BenOS.events
 
 ---
 

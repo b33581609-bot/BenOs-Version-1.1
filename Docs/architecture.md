@@ -272,11 +272,11 @@ Connects daily actions with personal mission.
 
 Current Status:
 
-Works with Planner but currently has direct dependency between modules.
+Reads today's tasks from BenOS.state.planner.today. No longer depends directly on the Planner module object.
 
-Future Goal:
+Completed:
 
-Move communication to BenOS events.
+Planner → Mission communication now runs through BenOS.events (planner.updated).
 
 ---
 
@@ -428,16 +428,16 @@ Controls:
 ✅ Mission module
 ✅ Weather module
 ✅ Teachings module
+✅ Calendar module
+✅ BenOS.state adoption (Planner)
+✅ Event communication (Planner → Mission)
 
 ---
 
 ## Systems Under Development
 
-⚠ BenOS.state adoption
-⚠ Event communication between modules
 ⚠ Configuration integration
 ⚠ Constants integration
-⚠ Calendar module — v1.0 implementation pending
 ⚠ Automated testing system
 
 ---
