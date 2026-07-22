@@ -1,27 +1,72 @@
-async function updateWeather(latitude = 44.3894, longitude = -79.6903, locationName = "Barrie, Ontario") {
+/*
+==================================================
+File:
+    weather.js
 
-    const weather = document.getElementById("weather");
+Version:
+    Ben OS v2.0
 
-    if (!weather) return;
+Purpose:
+    Displays live local weather conditions on the
+    Ben OS dashboard.
 
-    weather.innerHTML = "Loading weather...";
+Responsibilities:
+    - Detect user location via geolocation, with a
+      fallback location if unavailable
+    - Fetch current and daily weather data from the
+      Open-Meteo API
+    - Render weather conditions into the DOM
+    - Refresh weather data on a recurring interval
 
-    try {
+Dependencies:
+    BenOS Core
 
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+Used By:
+    Application UI
 
-        const response = await fetch(url);
+Future Improvements:
+    - Storage integration
+    - Event integration
+    - Logger integration for weather updates
 
-        if (!response.ok) {
-            throw new Error("Weather request failed");
-        }
+Last Updated:
+    Ben OS v2.0
+==================================================
+*/
 
-        const data = await response.json();
 
-        const current = data.current;
-        const daily = data.daily;
+BenOS.modules.weather = {
 
-        weather.innerHTML = `
+    /*
+    ------------------------------------
+    Update Weather
+    ------------------------------------
+    */
+
+    async updateWeather(latitude = 44.3894, longitude = -79.6903, locationName = "Barrie, Ontario") {
+
+        const weather = document.getElementById("weather");
+
+        if (!weather) return;
+
+        weather.innerHTML = "Loading weather...";
+
+        try {
+
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error("Weather request failed");
+            }
+
+            const data = await response.json();
+
+            const current = data.current;
+            const daily = data.daily;
+
+            weather.innerHTML = `
             <h3>🌤 ${locationName}</h3>
 
             <h1>${current.temperature_2m}°C</h1>
@@ -41,52 +86,84 @@ async function updateWeather(latitude = 44.3894, longitude = -79.6903, locationN
             <small>Updated ${new Date().toLocaleTimeString()}</small>
         `;
 
-    } catch (error) {
+        } catch (error) {
 
-        weather.innerHTML = "Unable to load weather.";
+            weather.innerHTML = "Unable to load weather.";
 
-        console.error(error);
+            console.error(error);
+
+        }
+
+    },
+
+
+    /*
+    ------------------------------------
+    Start Weather
+    ------------------------------------
+    */
+
+    startWeather() {
+
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(
+
+                position => {
+
+                    this.updateWeather(
+                        position.coords.latitude,
+                        position.coords.longitude,
+                        "Current Location"
+                    );
+
+                },
+
+                () => {
+
+                    this.updateWeather();
+
+                }
+
+            );
+
+        } else {
+
+            this.updateWeather();
+
+        }
+
+    },
+
+
+    /*
+    ------------------------------------
+    Initialize Weather
+    ------------------------------------
+    */
+
+    init() {
+
+        this.startWeather();
+
+        setInterval(() => this.startWeather(), 1800000);
+
+        if (BenOS.logger) {
+
+            BenOS.logger.info(
+                "Weather module initialized"
+            );
+
+        }
 
     }
 
-}
 
-function startWeather() {
+};
 
-    if (navigator.geolocation) {
-
-        navigator.geolocation.getCurrentPosition(
-
-            position => {
-
-                updateWeather(
-                    position.coords.latitude,
-                    position.coords.longitude,
-                    "Current Location"
-                );
-
-            },
-
-            () => {
-
-                updateWeather();
-
-            }
-
-        );
-
-    } else {
-
-        updateWeather();
-
-    }
-
-}
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    startWeather();
-
-    setInterval(startWeather, 1800000);
+    BenOS.modules.weather.init();
 
 });
