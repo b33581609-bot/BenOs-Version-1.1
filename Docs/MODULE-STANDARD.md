@@ -152,15 +152,14 @@ Status:
 Active
 
 Location:
-mod
-ules/mission/
+modules/mission/
 
 ---
 
 ## Calendar
 
 Status:
-Active
+Planned
 
 Location:
 modules/calendar/
@@ -180,7 +179,7 @@ modules/weather/
 ## Teachings
 
 Status:
-Foundation
+Planned
 
 Location:
 modules/teachings/

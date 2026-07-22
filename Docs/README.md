@@ -1,6 +1,6 @@
 # 🌲 BenOS
 
-**Version:** 1.1 – Strong Roots
+**Version:** 2.0 – Strong Roots
 
 ## Overview
 
@@ -55,7 +55,7 @@ The project is built from scratch using HTML, CSS and JavaScript while learning 
 
 Current Version
 
-**Version 1.1 — Strong Roots**
+**Version 2.0 — Strong Roots**
 
 Project Status
 

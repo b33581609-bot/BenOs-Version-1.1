@@ -90,7 +90,7 @@ Version 1.2 – Daily Flow
 
 ---
 
-# 🌳 Version 2.0 — Forest
+# 🌳 Version 3.0 — Forest
 
 - [ ] Cloud Sync
 - [ ] Mobile Version
