@@ -312,15 +312,15 @@ modules/calendar/
 
 Status:
 
-Planned
+In Development
 
 Current State:
 
-Module folder exists but implementation is incomplete.
+Calendar module design approved. Implementation pending.
 
 Future Purpose:
 
-Provide scheduling and calendar management.
+Provide scheduling and event management through date-based user events.
 
 ---
 
@@ -426,7 +426,7 @@ Controls:
 ⚠ Event communication between modules
 ⚠ Configuration integration
 ⚠ Constants integration
-⚠ Calendar module
+⚠ Calendar module — v1.0 implementation pending
 ⚠ Automated testing system
 
 ---

@@ -159,7 +159,7 @@ modules/mission/
 ## Calendar
 
 Status:
-Planned
+In Development
 
 Location:
 modules/calendar/
